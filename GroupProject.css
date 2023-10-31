@@ -1,0 +1,46 @@
+.menu{
+    position: fixed;
+    width: 10%;
+    left: 90%;
+    right: 0;
+    top: 0;
+    height: auto;
+    margin: 5px;
+    transition: height .6s ease-out;
+    overflow: auto;
+    border: 1px solid rgb(0, 0, 155);
+    background-color: rgb(0, 155, 0);
+}
+a:hover{
+    background-color: darkblue;
+    color: white;
+    text-decoration: underline;
+}
+a:active{
+    color: rgb(251, 235, 7);
+    text-decoration: solid;
+    font-style: italic;
+}
+
+a:visited{
+    color: purple;
+    text-decoration: underline;
+    font-style: italic;
+}
+a[href$=".mp3"]{
+    background: url("https://www.freeiconspng.com/uploads/mp3-icon-10.png") no-repeat left center;
+    padding-left: 20px;
+    background-size: 20px;
+}
+p{
+    overflow: scroll;
+    right: 0;
+    width: 90%;
+}
+h1{
+    font-weight: bold;
+    margin-left: 20px;
+}
+div p:first-of-type:first-letter{
+    font-size: 15px;
+}
