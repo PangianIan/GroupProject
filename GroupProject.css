@@ -44,3 +44,7 @@ h1{
 div p:first-of-type:first-letter{
     font-size: 15px;
 }
+#compName{
+    height: auto;
+    width: 40%;
+}
