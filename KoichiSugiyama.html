@@ -1,8 +1,38 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="GroupProject.css">
+<link rel="stylesheet" href="GroupProject.css" media="(min-width: 769px)">
+<link rel="stylesheet" href="GroupProjectTablet.css" media="(min-width: 481px) and (max-width: 768px)">
+<link rel="stylesheet" href="GroupProjectPhone.css" media="(max-width:480px)">
 <html lang="en">
     <main>
         <head>
+            <script>
+                //Make sure the DOM is done with its tasks
+                document.addEventListener('DOMContentLoaded', function(){
+                    //make the comment form to add the listener
+                    const commentForm = document.querySelector("#CommentForm");
+                    commentForm.addEventListener("submit", function(e){
+                        const submitButton = document.getElementById("SubmitButton");
+                        //disable the submit button
+                        submitButton.disabled = true;
+                        let com = document.querySelector("#comment").value;
+                        //make sure the comment has data in it; if not, inform the user and stop the submission while allowing for more
+                        if(com == "" || com == null){
+                            alert("Comment submission empty, please write something before submitting");
+                            e.preventDefault();
+                            submitButton.disabled = false;
+                            return;
+                        }
+                        //assign com to an object just to make it easier to stringify if more is added to the comment system
+                        const obj = {comment: com};
+                        //assing obj data to the JSON
+                        const commentJSON = JSON.stringify(obj);
+                        console.log(commentJSON);
+                        //assign the JSON to local storage and enable more submissions
+                        localStorage.setItem("SugiyamaCommentJSON", commentJSON);
+                        submitButton.disabled = false;
+                    });
+                });
+            </script>
             <title>Koichi Sugiyama - Videogame Music Composers</title>
             <nav class="menu">
                 <li>
@@ -50,19 +80,56 @@
         <body>
             <div>
                 <h1>
-                    
+                    Koichi Sugiyama
                 </h1>
+                <h2>
+                    Early Works
+                </h2>
                 <p>
-
+                    Sugiyama started by working for Nippon Cultural Broadcasting as a reporter and 
+                    entertainer. Eventually, he became a director of Fuji TV, but left in 1965 to 
+                    focus on music composition. For about two decades after, he began to compose 
+                    for commercials, shows, and other forms of media. Some notable ones are Cyborg 
+                    009 and his assistance on Godzilla vs. Hedorah. Overall, this previous work 
+                    helped make him a celebrity.
+                </p>
+                <h2>
+                    Enix and Death
+                </h2>
+                <p>
+                    In the 1980's, Sugiyama sent a letter to Enix about a shogi game they had made. 
+                    Suprised to have recieved a letter from someone of Sugiyama's fame, they asked 
+                    him to compose for them given his knowledge of their games. Sugiyama accepted, 
+                    and the first game he composed for them was Wingman 2. However, much more well 
+                    known, he later composed for Dragon Quest, where his musical score was 
+                    well known for being the first to use a live orchestra to record it and was 
+                    seen as revolutionary. Sugiyama even released a CD based purely on the games where 
+                    he had an orchestra playing. This was done with the help of the Tokyo Strings Ensemble. 
+                    He has since composed for every single Dragon Quest game up to Dragon Quest XI. 
+                    He also began to hold many events where the Tokyo Strings Ensemble and the 
+                    London Philharmonic Orchestra would play songs he had composed, as well as those 
+                    of seventeen others. For his work, Sugiyama was declared a Person of Cultural 
+                    Merit in the country of Japan. Sugiyama died in 2021 from septic shock. Afterwords, 
+                    a TV broadcast was done on Nippon TV to celebrate his life and work. 
+                </p>
+                <h2>
+                    Style
+                </h2>
+                <p>
+                    Sugiyama is well known for his use of motifs throughout his work. As an example, 
+                    every Dragon Quest game has practically identical versions of the Overture theme. 
+                    It has also been said that his style was inspired by the Baroque and Classical 
+                    periods of music. Sugiyama reportedly used drafts of stories he was given in order 
+                    to determine the correct tone and feeling needed throughout the piece. 
                 </p>
             </div>
         </body>
-        <form action="#">
+        <form id="CommentForm">
             <label for="comment">
                 Comments
             </label><br>
             <textarea name="comment" id="comment" cols="30" rows="10"></textarea><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="SubmitButton">
         </form>
     </main>
 

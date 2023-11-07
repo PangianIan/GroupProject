@@ -1,8 +1,38 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="GroupProject.css">
+<link rel="stylesheet" href="GroupProject.css" media="(min-width: 769px)">
+<link rel="stylesheet" href="GroupProjectTablet.css" media="(min-width: 481px) and (max-width: 768px)">
+<link rel="stylesheet" href="GroupProjectPhone.css" media="(max-width: 480px)">
 <html lang="en">
     <main>
         <head>
+            <script>
+                //Make sure the DOM is done with its tasks
+                document.addEventListener('DOMContentLoaded', function(){
+                    //make the comment form to add the listener
+                    const commentForm = document.querySelector("#CommentForm");
+                    commentForm.addEventListener("submit", function(e){
+                        const submitButton = document.getElementById("SubmitButton");
+                        //disable the submit button
+                        submitButton.disabled = true;
+                        let com = document.querySelector("#comment").value;
+                        //make sure the comment has data in it; if not, inform the user and stop the submission while allowing for more
+                        if(com == "" || com == null){
+                            alert("Comment submission empty, please write something before submitting");
+                            e.preventDefault();
+                            submitButton.disabled = false;
+                            return;
+                        }
+                        //assign com to an object just to make it easier to stringify if more is added to the comment system
+                        const obj = {comment: com};
+                        //assing obj data to the JSON
+                        const commentJSON = JSON.stringify(obj);
+                        console.log(commentJSON);
+                        //assign the JSON to local storage and enable more submissions
+                        localStorage.setItem("ShimomuraCommentJSON", commentJSON);
+                        submitButton.disabled = false;
+                    });
+                });
+            </script>
             <title>Yoko Shimomura - Videogame Music Composers</title>
             <nav class="menu">
                 <li>
@@ -50,19 +80,64 @@
         <body>
             <div>
                 <h1>
-                    
+                    Yoko Shimomura
                 </h1>
+                <h2>
+                    Early Life
+                </h2>
                 <p>
-
+                    Shimomura was born in Hyogo, Japan. She started learning piano and composing 
+                    music around the age of five. She then went to the Osaka College for Music 
+                    and graduated as a piano major in 1988. After thinking of being a piano 
+                    instructor, she decided to instead apply to video game companies due to her 
+                    enjoyment of video games. She was eventually offered a job at Capcom and accepted 
+                    it (to the dismay of her parents and instructors who say it as a lesser form 
+                    of music).
+                </p>
+            </div>
+            <div>
+                <h2>
+                    Early Career in Video Games
+                </h2>
+                <p>
+                    At Capcom, Shimomura composed for over sixteen games like Street Fighter II 
+                    and Final Fight. Many of these games even released albums of the soundtracks that 
+                    sold well, including ones that were solely her work. She also joined the band 
+                    at Capcom, Alpha Lyla, who she performed with live several times. 
+                </p>
+                <p>
+                    In 1993, however, she left Capcom to join Square, stating that the "classical 
+                    style" of Square fit her style more than Capcom. This is because she was 
+                    mostly constricted to the arcade section of Capcom instead of console games. 
+                    To begin at Square, she made the score for Live A Live. She also created the scores 
+                    to many of their big projects like Super Mario RPG and Front Mission, which she 
+                    worked on concurrently.
+                </p>
+            </div>
+            <div>
+                <h2>Later Works</h2>
+                <p>
+                    After the introduction of the PlayStation, Shimomura made a few more scores 
+                    for fairly high-profile games. These include ones such as Parasite Eve and 
+                    Legend of Mana (the later of which Shimomura states was the best representation 
+                    of her work). Meanwhile, Parasite eve was the first work of her to include a vocal 
+                    song, which would become very popular in her later work. Eventually, she began to 
+                    work on what would be one of the biggest turning points of her career: the score 
+                    for Kingdom Hearts. Kingdom Hearts sold extremely well and many of the praises 
+                    were about the soundtrack itself. It was also the last work Shimomura did working 
+                    under Square, as she left on maternity leave and decided to do freelance work 
+                    afterwards. Since then, she has worked on every Kingdom Hearts soundtrack, 
+                    the Mario and Luigi rpgs, and Final Fantasy XV. Overall, she has become one 
+                    of the more recognizable video game composers in history.
                 </p>
             </div>
         </body>
-        <form action="#">
+        <form id="CommentForm">
             <label for="comment">
                 Comments
             </label><br>
             <textarea name="comment" id="comment" cols="30" rows="10"></textarea><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="SubmitButton">
         </form>
     </main>
 

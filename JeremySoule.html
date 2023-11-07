@@ -1,8 +1,38 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="GroupProject.css">
+<link rel="stylesheet" href="GroupProject.css" media="(min-width: 769px)">
+<link rel="stylesheet" href="GroupProjectTablet.css" media="(min-width: 481px) and (max-width: 768px)">
+<link rel="stylesheet" href="GroupProjectPhone.css" media="(max-width:480px)">
 <html lang="en">
     <main>
         <head>
+            <script>
+                //Make sure the DOM is done with its tasks
+                document.addEventListener('DOMContentLoaded', function(){
+                    //make the comment form to add the listener
+                    const commentForm = document.querySelector("#CommentForm");
+                    commentForm.addEventListener("submit", function(e){
+                        const submitButton = document.getElementById("SubmitButton");
+                        //disable the submit button
+                        submitButton.disabled = true;
+                        let com = document.querySelector("#comment").value;
+                        //make sure the comment has data in it; if not, inform the user and stop the submission while allowing for more
+                        if(com == "" || com == null){
+                            alert("Comment submission empty, please write something before submitting");
+                            e.preventDefault();
+                            submitButton.disabled = false;
+                            return;
+                        }
+                        //assign com to an object just to make it easier to stringify if more is added to the comment system
+                        const obj = {comment: com};
+                        //assing obj data to the JSON
+                        const commentJSON = JSON.stringify(obj);
+                        console.log(commentJSON);
+                        //assign the JSON to local storage and enable more submissions
+                        localStorage.setItem("SouleCommentJSON", commentJSON);
+                        submitButton.disabled = false;
+                    });
+                });
+            </script>
             <title>Jeremy Soule - Videogame Music Composers</title>
             <nav class="menu">
                 <li>
@@ -50,19 +80,73 @@
         <body>
             <div>
                 <h1>
-                    
+                    Jeremy Soule
                 </h1>
+                <h2>
+                    Early Life
+                </h2>
                 <p>
-
+                    Jeremy Soule is from Keokuk, Iowa. He is the son of a music teacher and graphic 
+                    designer. Jeremy Soule started having an interest in symphony orchestras and 
+                    learning the piano from an early age. Eventually, when those around him learned 
+                    of this talent and interest, he began recieving private lessons from Western 
+                    Illinoise University professors. While he never attended the school to recieve a 
+                    degree, he stated that he had the equivalent of one before leaving high school. 
+                    Soule also had an interest in video games from a young age, but stated that the 
+                    experience would be better if the musical score could be improved. Thus, he sent 
+                    a portfolio to Square based on what he believed was good game music, and they hired him.
                 </p>
+                <div>
+                    <h2>
+                        Early Works
+                    </h2>
+                    <p>
+                        Soule's first composition work was the score for Secret of Evermore. 
+                        Due to technical limitations leading to not bein able to fully implement 
+                        ideas, Soule had to simply use noises like wind blowing and waves in the 
+                        score to try to create an atmosphere. Eventually, Square decided to move, 
+                        and a new company called Humongous Entertainment had started. Therefore, 
+                        to avoid a move, Soule decided to apply there. While there, Soule began 
+                        working on several children's point and click games like Putt Putt, 
+                        Pajama Sam, and Freddi Fish. After this, he began working on other games 
+                        like Total Annihilation. For this game, Soule bet a year of his salary that 
+                        the soundtrack was important to making the game successful in an RTS saturated 
+                        market. It was also the first time Soule worked with a full orchestra. However, 
+                        Soule's work paid off, and even wone him an his first award. 
+                    </p>
+                </div>
+                <div>
+                    <h2>Soule Media</h2>
+                    <p>
+                        After working on other games and expansions for Humongous Entertainment, the brothers 
+                        Jeremy and Julian Soule both went on to form Soule Media (which would 
+                        become Artistry Entertainment). The first big project they took on was Icewind 
+                        Dale, which would win them an award from IGN and Gamespot for the soundtrack.
+                        They then worked on five Harry Potter games from 2001 to 2005, most of which were 
+                        nominated for awards by various intitutions for their soundtracks. Finally, he 
+                        soundtracked for three soon to be best sellers: Morrowind, Dungeon Siege, and 
+                        Neverwinter Nights.
+                    </p>
+                </div>
+                <div>
+                    <h2>
+                        Later Works
+                    </h2>
+                    <p>
+                        Many of Soule's later works were on top sellers. Soule worked on big names 
+                        in the remaining years of the 2000's like 
+                        Oblivion, Guild Wars, Star Wars: Knights of the Old Republic, and Warhammer games.
+                        Finally, he worked on even more big games like Skyrim, and another Guild Wars game.
+                    </p>
+                </div>
             </div>
         </body>
-        <form action="#">
+        <form id="CommentForm">
             <label for="comment">
                 Comments
             </label><br>
             <textarea name="comment" id="comment" cols="30" rows="10"></textarea><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="SubmitButton">
         </form>
     </main>
 

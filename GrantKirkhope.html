@@ -1,8 +1,38 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="GroupProject.css">
+<link rel="stylesheet" href="GroupProject.css" media="(min-width: 769px)">
+<link rel="stylesheet" href="GroupProjectTablet.css" media="(min-width: 481px) and (max-width: 768px)">
+<link rel="stylesheet" href="GroupProjectPhone.css" media="(max-width:480px)">
 <html lang="en">
     <main>
         <head>
+            <script>
+                //Make sure the DOM is done with its tasks
+                document.addEventListener('DOMContentLoaded', function(){
+                    //make the comment form to add the listener
+                    const commentForm = document.querySelector("#CommentForm");
+                    commentForm.addEventListener("submit", function(e){
+                        const submitButton = document.getElementById("SubmitButton");
+                        //disable the submit button
+                        submitButton.disabled = true;
+                        let com = document.querySelector("#comment").value;
+                        //make sure the comment has data in it; if not, inform the user and stop the submission while allowing for more
+                        if(com == "" || com == null){
+                            alert("Comment submission empty, please write something before submitting");
+                            e.preventDefault();
+                            submitButton.disabled = false;
+                            return;
+                        }
+                        //assign com to an object just to make it easier to stringify if more is added to the comment system
+                        const obj = {comment: com};
+                        //assing obj data to the JSON
+                        const commentJSON = JSON.stringify(obj);
+                        console.log(commentJSON);
+                        //assign the JSON to local storage and enable more submissions
+                        localStorage.setItem("KirkhopeCommentJSON", commentJSON);
+                        submitButton.disabled = false;
+                    });
+                });
+            </script>
             <title>Grant Kirkhope - Videogame Music Composers</title>
             <nav class="menu">
                 <li>
@@ -50,19 +80,47 @@
         <body>
             <div>
                 <h1>
-                    
+                    Grant Kirkhope
                 </h1>
+                <h2>
+                    Early Life and Works
+                </h2>
                 <p>
-
+                    Kirkhope was born in Edinburgh, Scotland, but grew up in Knaresborough, New 
+                    Yorkshire. He started his love of music from an early 
+                    age, learning guitar by eleven, avidly listening to musicians like Frank Sinatra, 
+                    and being classically trained in the trumpet. He attended the Royal Norther College 
+                    of Music where he was a part of many bands. After college in 1995, Kirkhope joined 
+                    Rare to compose for their games. 
                 </p>
             </div>
+            <div>
+                <h2>
+                    Rare and Later Works
+                </h2>
+                <p>
+                    While at Rare, Kirkhope composed for many of their big games. These include 
+                    Goldeneye, Banjo Kazooie, and Donkey Kong 64. He also created the soundtrack 
+                    for Viva Pinata, which ended upgetting him nominated a BAFTA award for his 
+                    score. In 2008, he moved to Baltimore, Maryland where he worked on Big Huge 
+                    Games' Kingdom of Amalur. This also got him nominated for several awards for 
+                    the soundtrack. Eventually, however, he decided to settle down in Los Angeles, 
+                    California. There, he was nominated for even more awards for Civilization: Beyond 
+                    Earth. He is also the only Western composer who was asked by Nintendo to work 
+                    on Mario + Rabbids Sparks of Hope.
+                </p>
+            </div>
+            <div>
+                <h2>
+                <a href="https://www.grantkirkhope.com/">Grant Kirkhope's Personal Website</a>
+            </div>
         </body>
-        <form action="#">
+        <form id="CommentForm">
             <label for="comment">
                 Comments
             </label><br>
             <textarea name="comment" id="comment" cols="30" rows="10"></textarea><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="SubmitButton">
         </form>
     </main>
 

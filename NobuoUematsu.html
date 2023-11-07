@@ -1,8 +1,38 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="GroupProject.css">
+<link rel="stylesheet" href="GroupProject.css" media="(min-width: 769px)">
+<link rel="stylesheet" href="GroupProjectTablet.css" media="(min-width: 481px) and (max-width: 768px)">
+<link rel="stylesheet" href="GroupProjectPhone.css" media="(max-width:480px)">
 <html lang="en">
     <main>
         <head>
+            <script>
+                //Make sure the DOM is done with its tasks
+                document.addEventListener('DOMContentLoaded', function(){
+                    //make the comment form to add the listener
+                    const commentForm = document.querySelector("#CommentForm");
+                    commentForm.addEventListener("submit", function(e){
+                        const submitButton = document.getElementById("SubmitButton");
+                        //disable the submit button
+                        submitButton.disabled = true;
+                        let com = document.querySelector("#comment").value;
+                        //make sure the comment has data in it; if not, inform the user and stop the submission while allowing for more
+                        if(com == "" || com == null){
+                            alert("Comment submission empty, please write something before submitting");
+                            e.preventDefault();
+                            submitButton.disabled = false;
+                            return;
+                        }
+                        //assign com to an object just to make it easier to stringify if more is added to the comment system
+                        const obj = {comment: com};
+                        //assing obj data to the JSON
+                        const commentJSON = JSON.stringify(obj);
+                        console.log(commentJSON);
+                        //assign the JSON to local storage and enable more submissions
+                        localStorage.setItem("UematsuCommentJSON", commentJSON);
+                        submitButton.disabled = false;
+                    });
+                });
+            </script>
             <title>Nobuo Uematsu - Videogame Music Composers</title>
             <nav class="menu">
                 <li>
@@ -48,15 +78,58 @@
             </nav>
         </head>
         <body>
-            <p>
-            </p>
+            <h1>
+                Nobuo Uematsu
+            </h1>
+            
+            <div>
+                <h2>
+                    Early Works
+                </h2>
+                <p>
+                    Nobuo Uematsu is a Japanese composer from the Kochi Prefecture. While he was at Kanagawa
+                    University studying English, he played music in several bands and composed minor jingles.
+                    He never had any formal training, but he was self-taught in the piano and learned to write 
+                    music. Eventually, he was approached by his friend Hironobu Sakaguchi and asked
+                    if he would like to compose music for the game Cruise Chaser Blassty. Nobuo Uematsu 
+                    then continued to help write music for Square, the company Sakaguchi worked at. However, 
+                    none of the games he composed for were extremely successful until FInal Fantasy. 
+                </p>
+            </div>
+            <div>
+                <h2>Final Fantasy and Square</h2>
+                <p>
+                    After Final Fantasy became a commercial hit, Uematsu began to compose a lot of music for Square.
+                    To begin with, he composed for pretty much every Final Fantasy game after that, which had become an
+                    incredibly popular series of the genre. In addition, he helped compose the music for other games by 
+                    Square, like Chrono Trigger. After the success of his music in the games, Uematsu even started 
+                    his own band called The Black Mages with some of his coworkers: Kenichiro Fukui, Tsuyoshi Sekito, 
+                    Keiji Kawamori, Arata Hanyuda, and Michio Okamiya. This band, as the name implies,
+                    mainly performed songs from Final Fantasy games, but did release a few new titles like 
+                    "Blue Blast - Winning the Rainbow." 
+                </p>
+            </div>
+            <div>
+                <h2>Dog Ear Records and Other Works</h2>
+                <p>
+                    After he decided his time working directly for Square was over, Uematsu created 
+                    Dog Ear Records as his own record and studio and production company. Uematsu has stated 
+                    the main reason for this split was simply due to the moving of Square Enix's headquarters, 
+                    which he had no intention of doing. After this, while still working with Square Enix, Uematsu 
+                    began working for other studios as well like Mistwalker which was made by his Sakaguchi. 
+                    Uematsu even wrote songs for some Nintendo games like the main theme of Super Smash Bros Brawl.
+                    Many of Uematsu's works even went on to be inducted in several Halls of Fame. However, Uematsu 
+                    began a hiatus in 2018 due to health concerns and the stress of work, which had even left him 
+                    hospitalized.  
+                </p>
+            </div>
         </body>
-        <form action="#">
+        <form id="CommentForm">
             <label for="comment">
                 Comments
             </label><br>
             <textarea name="comment" id="comment" cols="30" rows="10"></textarea><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="SubmitButton">
         </form>
     </main>
 
