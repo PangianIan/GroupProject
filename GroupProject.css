@@ -64,3 +64,26 @@ img{
     width: 50%;
     height: 50%;
 }
+#PacmanGhosts{
+    transition-property: width;
+    transition-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: movement;
+    animation-play-state: running;
+    animation-duration: 5s;
+    height: 100px;
+    width: 100px;
+}
+@keyframes movement{
+    0%{transform: translateX(100px);
+    }
+    50%{
+        transform: translateX(500px);
+    }
+    100%{
+        transform: translateX(100px);
+    }
+}
+#PacmanGhosts:hover{
+    width: 300px;
+}
