@@ -62,3 +62,7 @@ td{
 th{
     border: solid 1pt black;
 }
+img{
+    width: 20%;
+    height: 20%;
+}
