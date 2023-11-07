@@ -51,3 +51,14 @@ div p:first-of-type:first-letter{
     height: auto;
     width: 40%;
 }
+
+table{
+    border: solid 2pt black;
+}
+
+td{
+    border: solid 1pt black;
+}
+th{
+    border: solid 1pt black;
+}
