@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="GroupProjectTablet.css" media="(min-width: 481px) and (max-width: 768px)">
 <link rel="stylesheet" href="GroupProjectPhone.css" media="(max-width: 480px)">
 <html lang="en">
+    <?php
+        session_start();
+    ?>
     <main>
         <head>
             <script>
@@ -90,11 +93,18 @@
             </nav>
         </head>
         <body>
+            <?php 
+                if($_SESSION['loggedIn'] == true) {
+            ?>
+            <h1>LOGGED IN</h1>
+            <?php 
+            } 
+            ?>
             <article>
                 <section>
                     <div>
                         <h1>
-                            Video Game Music Composers
+                            Video Game Music Composers            
                         </h1>
                         <p>
                             One of the most prominent features of videogames can often be the music behind it. From creating a good general
@@ -113,25 +123,40 @@
                             (Please include the name of the composer to add or change the information of for ease of fixing it)
                         </p>
                     </div>
-                    <h2>Register</h2><form action="http://localhost:8888/register.php" method="post">
+                    <h2>Register</h2>
+                    <form action="http://localhost:8888/register.php" method="post">
                         <label for="username">
                             Username
                         </label>
-                        <input type="text" id="username" name="username"><br>
+                        <input type="text" id="username" name="username" required><br>
                         <label for="password">Password</label><br>
-                        <input type="text" id="password" name="password"><br>
-                        <input type="submit" value="Submit" id="SubmitButton">
+                        <input type="text" id="password" name="password" required><br>
+                        <input type="submit" value="Login" id="SubmitButtonLogin">
                     </form>
-                    <h2>Login</h2>
-                    <form id ="login" action="http://localhost:8888/login.php" method="post">
-                        <label for="username">
-                            Username
-                        </label>
-                        <input type="text" id="username" name="username"><br>
-                        <label for="password">Password</label><br>
-                        <input type="text" id="password" name="password"><br>
-                        <input type="submit" value="Submit" id="SubmitButton">
-                    </form>
+                    <?php
+                        if($_SESSION['loggedIn'] == false) {
+                    ?>
+                        <h2>Login</h2>
+                        <form id ="login" action="http://localhost:8888/login.php" method="post">
+                            <label for="username">
+                                Username
+                            </label>
+                            <input type="text" id="username" name="username"><br>
+                            <label for="password">Password</label><br>
+                            <input type="text" id="password" name="password"><br>
+                            <input type="submit" value="Submit" id="SubmitButtonRegister">
+                        </form>
+                    <?php
+                        }
+                    ?>
+                    <?php
+                        if($_SESSION['loggedIn'] == true) {
+                    ?>
+                        <a href="logout.php">LOG OUT</a>
+                        <a href="store.php">STORE</a>
+                    <?php
+                        }
+                    ?>
                     <form id ="CommentSubmission">
                         <label for="compName">
                             Composer's Full Name
